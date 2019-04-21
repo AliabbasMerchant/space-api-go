@@ -3,23 +3,23 @@ package mgo
 import (
 	"context"
 
+	"github.com/spaceuptech/space-api-go/api/client"
 	"github.com/spaceuptech/space-api-go/api/config"
 	"github.com/spaceuptech/space-api-go/api/model"
-	"github.com/spaceuptech/space-api-go/api/proto"
 	"github.com/spaceuptech/space-api-go/api/utils"
 )
 
 // Update contains the methods for the update operation
 type Update struct {
 	ctx          context.Context
-	meta         *proto.Meta
+	meta         *client.Meta
 	op           string
 	find, update utils.M
 	config       *config.Config
 }
 
 func initUpdate(ctx context.Context, db, col, op string, config *config.Config) *Update {
-	m := &proto.Meta{Col: col, DbType: db, Project: config.Project, Token: config.Token}
+	m := &client.Meta{Col: col, DbType: db, Project: config.Project, Token: config.Token}
 	f := make(utils.M)
 	u := make(utils.M)
 	return &Update{ctx, m, op, f, u, config}

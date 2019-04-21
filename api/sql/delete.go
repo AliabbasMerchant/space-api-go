@@ -3,24 +3,24 @@ package sql
 import (
 	"context"
 
+	"github.com/spaceuptech/space-api-go/api/client"
 	"github.com/spaceuptech/space-api-go/api/config"
 	"github.com/spaceuptech/space-api-go/api/mgo"
 	"github.com/spaceuptech/space-api-go/api/model"
-	"github.com/spaceuptech/space-api-go/api/proto"
 	"github.com/spaceuptech/space-api-go/api/utils"
 )
 
 // Delete contains the methods for the delete operation
 type Delete struct {
 	ctx    context.Context
-	meta   *proto.Meta
+	meta   *client.Meta
 	op     string
 	find   utils.M
 	config *config.Config
 }
 
 func initDelete(ctx context.Context, db, col, op string, config *config.Config) *Delete {
-	m := &proto.Meta{Col: col, DbType: db, Project: config.Project, Token: config.Token}
+	m := &client.Meta{Col: col, DbType: db, Project: config.Project, Token: config.Token}
 	f := make(utils.M)
 	return &Delete{ctx, m, op, f, config}
 }

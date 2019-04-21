@@ -4,13 +4,13 @@ import (
 	"context"
 	"encoding/json"
 
+	"github.com/spaceuptech/space-api-go/api/client"
 	"github.com/spaceuptech/space-api-go/api/model"
-	"github.com/spaceuptech/space-api-go/api/proto"
 	"github.com/spaceuptech/space-api-go/api/utils"
 )
 
 // Update triggers the gRPC update function on space cloud
-func (t *Transport) Update(ctx context.Context, meta *proto.Meta, op string, find, update utils.M) (*model.Response, error) {
+func (t *Transport) Update(ctx context.Context, meta *client.Meta, op string, find, update utils.M) (*model.Response, error) {
 	updateJSON, err := json.Marshal(update)
 	if err != nil {
 		return nil, err
@@ -21,7 +21,7 @@ func (t *Transport) Update(ctx context.Context, meta *proto.Meta, op string, fin
 		return nil, err
 	}
 
-	req := proto.UpdateRequest{Find: findJSON, Update: updateJSON, Meta: meta, Operation: op}
+	req := client.UpdateRequest{Find: findJSON, Update: updateJSON, Meta: meta, Operation: op}
 	res, err := t.stub.Update(ctx, &req)
 	if err != nil {
 		return nil, err

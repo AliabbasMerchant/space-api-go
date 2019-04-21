@@ -3,23 +3,23 @@ package mgo
 import (
 	"context"
 
+	"github.com/spaceuptech/space-api-go/api/client"
 	"github.com/spaceuptech/space-api-go/api/config"
 	"github.com/spaceuptech/space-api-go/api/model"
-	"github.com/spaceuptech/space-api-go/api/proto"
 	"github.com/spaceuptech/space-api-go/api/utils"
 )
 
 // Insert contains the methods for the create operation
 type Insert struct {
 	ctx    context.Context
-	meta   *proto.Meta
+	meta   *client.Meta
 	op     string
 	obj    interface{}
 	config *config.Config
 }
 
 func initInsert(ctx context.Context, db, col string, config *config.Config) *Insert {
-	m := &proto.Meta{Col: col, DbType: db, Project: config.Project, Token: config.Token}
+	m := &client.Meta{Col: col, DbType: db, Project: config.Project, Token: config.Token}
 	return &Insert{ctx: ctx, meta: m, config: config}
 }
 

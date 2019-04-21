@@ -3,25 +3,25 @@ package mgo
 import (
 	"context"
 
+	"github.com/spaceuptech/space-api-go/api/client"
 	"github.com/spaceuptech/space-api-go/api/config"
 	"github.com/spaceuptech/space-api-go/api/model"
-	"github.com/spaceuptech/space-api-go/api/proto"
 	"github.com/spaceuptech/space-api-go/api/utils"
 )
 
 // Get contains the methods for the get operation
 type Get struct {
 	ctx         context.Context
-	meta        *proto.Meta
-	readOptions *proto.ReadOptions
+	meta        *client.Meta
+	readOptions *client.ReadOptions
 	op          string
 	find        utils.M
 	config      *config.Config
 }
 
 func initGet(ctx context.Context, db, col, op string, config *config.Config) *Get {
-	m := &proto.Meta{Col: col, DbType: db, Project: config.Project, Token: config.Token}
-	r := new(proto.ReadOptions)
+	m := &client.Meta{Col: col, DbType: db, Project: config.Project, Token: config.Token}
+	r := new(client.ReadOptions)
 	f := make(utils.M)
 	return &Get{ctx, m, r, op, f, config}
 }

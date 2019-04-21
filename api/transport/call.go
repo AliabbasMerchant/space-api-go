@@ -4,8 +4,8 @@ import (
 	"context"
 	"encoding/json"
 
+	"github.com/spaceuptech/space-api-go/api/client"
 	"github.com/spaceuptech/space-api-go/api/model"
-	"github.com/spaceuptech/space-api-go/api/proto"
 	"github.com/spaceuptech/space-api-go/api/utils"
 )
 
@@ -16,7 +16,7 @@ func (t *Transport) Call(ctx context.Context, token, engine, function string, pa
 		return nil, err
 	}
 
-	req := proto.FaaSRequest{Params: paramsJSON, Timeout: int64(timeout), Token: token, Engine: engine, Function: function}
+	req := client.FaaSRequest{Params: paramsJSON, Timeout: int64(timeout), Token: token, Engine: engine, Function: function}
 	res, err := t.stub.Call(ctx, &req)
 	if err != nil {
 		return nil, err

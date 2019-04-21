@@ -3,14 +3,14 @@ package transport
 import (
 	"crypto/tls"
 
-	"github.com/spaceuptech/space-api-go/api/proto"
+	"github.com/spaceuptech/space-api-go/api/client"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
 
 // Transport is the objct which handles all communication with the server
 type Transport struct {
-	stub proto.SpaceCloudClient
+	stub client.SpaceCloudClient
 }
 
 // Init initialises a new transport
@@ -28,6 +28,6 @@ func Init(host, port string, sslEnabled bool) (*Transport, error) {
 		return nil, err
 	}
 
-	stub := proto.NewSpaceCloudClient(conn)
+	stub := client.NewSpaceCloudClient(conn)
 	return &Transport{stub}, nil
 }

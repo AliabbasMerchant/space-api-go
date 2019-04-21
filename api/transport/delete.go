@@ -4,19 +4,19 @@ import (
 	"context"
 	"encoding/json"
 
+	"github.com/spaceuptech/space-api-go/api/client"
 	"github.com/spaceuptech/space-api-go/api/model"
-	"github.com/spaceuptech/space-api-go/api/proto"
 	"github.com/spaceuptech/space-api-go/api/utils"
 )
 
 // Delete triggers the gRPC delete function on space cloud
-func (t *Transport) Delete(ctx context.Context, meta *proto.Meta, op string, find utils.M) (*model.Response, error) {
+func (t *Transport) Delete(ctx context.Context, meta *client.Meta, op string, find utils.M) (*model.Response, error) {
 	findJSON, err := json.Marshal(find)
 	if err != nil {
 		return nil, err
 	}
 
-	req := proto.DeleteRequest{Find: findJSON, Meta: meta, Operation: op}
+	req := client.DeleteRequest{Find: findJSON, Meta: meta, Operation: op}
 	res, err := t.stub.Delete(ctx, &req)
 	if err != nil {
 		return nil, err

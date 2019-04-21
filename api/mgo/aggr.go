@@ -3,22 +3,22 @@ package mgo
 import (
 	"context"
 
+	"github.com/spaceuptech/space-api-go/api/client"
 	"github.com/spaceuptech/space-api-go/api/config"
 	"github.com/spaceuptech/space-api-go/api/model"
-	"github.com/spaceuptech/space-api-go/api/proto"
 )
 
 // Aggr contains the methods for the aggregation operation
 type Aggr struct {
 	ctx      context.Context
-	meta     *proto.Meta
+	meta     *client.Meta
 	op       string
 	pipeline []interface{}
 	config   *config.Config
 }
 
 func initAggr(ctx context.Context, db, col, op string, config *config.Config) *Aggr {
-	m := &proto.Meta{Col: col, DbType: db, Project: config.Project, Token: config.Token}
+	m := &client.Meta{Col: col, DbType: db, Project: config.Project, Token: config.Token}
 	p := []interface{}{}
 	return &Aggr{ctx, m, op, p, config}
 }
